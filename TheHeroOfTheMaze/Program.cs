@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TheHeroOfTheMaze
@@ -17,14 +14,21 @@ namespace TheHeroOfTheMaze
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormHello());
+            Application.Run(new RegistrationName());
             Application.Run(new FormLevels());
-            Application.Run(new FormGame());
+            if (FormLevels.flagclose == true)
+            {
+                Application.Run(new FormGame());
+            }
 
             while (FormGame.exit == 0)
             {
                 FormGame.exit = -1;
                 Application.Run(new FormLevels());
-                Application.Run(new FormGame());
+                if (FormLevels.flagclose == true)
+                {
+                    Application.Run(new FormGame());
+                }
             }
 
         }

@@ -12,13 +12,25 @@ namespace TheHeroOfTheMaze
         Timer timerGame;
         int leatherRopeFung = 0;
 
-        public Control(DataGridView dataGridViewField, System.Windows.Forms.Label steps,int x,int y, int[,] arrayCells,Timer timerGame, System.Windows.Forms.Label timeEnd) : base(dataGridViewField, steps, arrayCells)
+        public Control(DataGridView dataGridViewField, System.Windows.Forms.Label labelSteps,int x,int y, int[,] arrayCells,Timer timerGame, System.Windows.Forms.Label timeEnd) : base(dataGridViewField, labelSteps, arrayCells)
         {
             this.x = x;
             this.y = y;
-            this.labelSteps = steps;
+            this.labelSteps = labelSteps;
             this.timerGame = timerGame;
             this.timeEnd = timeEnd;
+        }
+
+        
+        private void End()
+        {
+            timerGame.Stop();
+            MessageBox.Show("Вы вышли из лабиринта за количество секунд, равное " + timeEnd.Text + "!");
+            FormLevels.levelPerson++;
+            numberOfSteps = 0;
+            timeEnd.Text = "0";
+            labelSteps.Text = numberOfSteps.ToString();
+            DrawLabirint();
         }
         public void UpClick()
         {
@@ -41,19 +53,16 @@ namespace TheHeroOfTheMaze
                 {
                     if (FormLevels.numblvl == 5 && leatherRopeFung == 3)
                     {
+                        RegistrationName.time += Convert.ToInt32(timeEnd.Text)+Convert.ToInt32(labelSteps.Text);
                         arrayCells[y - 1, x] = 2;
                         arrayCells[y, x] = 0;
                         numberOfSteps++;
                         labelSteps.Text = numberOfSteps.ToString();
                         DrawLabirintGame();
                         y--;
-                        timerGame.Stop();
-                        MessageBox.Show("Вы вышли из лабиринта за количество секунд, равное " + timeEnd.Text + "!");
-                        FormLevels.levelPerson++;
-                        numberOfSteps = 0;
-                        timeEnd.Text = "0";
-                        labelSteps.Text = numberOfSteps.ToString();
-                        DrawLabirint();
+                       
+                        End();
+
                     }
                     else if (FormLevels.numblvl == 5 && leatherRopeFung != 3)
                     {
@@ -61,19 +70,15 @@ namespace TheHeroOfTheMaze
                     }
                     else if (FormLevels.numblvl < 5)
                     {
+                        RegistrationName.time += Convert.ToInt32(timeEnd.Text) + Convert.ToInt32(labelSteps.Text);
                         arrayCells[y - 1, x] = 2;
                         arrayCells[y, x] = 0;
                         numberOfSteps++;
                         labelSteps.Text = numberOfSteps.ToString();
                         DrawLabirintGame();
                         y--;
-                        timerGame.Stop();
-                        MessageBox.Show("Вы вышли из лабиринта за количество секунд, равное " + timeEnd.Text + "!");
-                        FormLevels.levelPerson++;
-                        numberOfSteps = 0;
-                        timeEnd.Text = "0";
-                        labelSteps.Text = numberOfSteps.ToString();
-                        DrawLabirint();
+                        
+                        End();
                     }
                     
                 }
@@ -110,24 +115,17 @@ namespace TheHeroOfTheMaze
                 {
                     if (FormLevels.numblvl == 5 && leatherRopeFung == 3)
                     {
+                        RegistrationName.time += Convert.ToInt32(timeEnd.Text) + Convert.ToInt32(labelSteps.Text);
                         arrayCells[y, x + 1] = 2;
                         arrayCells[y, x] = 0;
                         numberOfSteps++;
                         labelSteps.Text = numberOfSteps.ToString();
                         DrawLabirintGame();
                         x++;
-                        timerGame.Stop();
-                        MessageBox.Show("Вы вышли из лабиринта за количество секунд, равное " + timeEnd.Text + "!");
-                        FormLevels.levelPerson++;
-
+                        
                         FormLevels.numblvl++;
                         FormGame.nextLevel++;
-
-                        numberOfSteps = 0;
-                        timeEnd.Text = "0";
-                        labelSteps.Text = numberOfSteps.ToString();
-
-                        DrawLabirint();
+                        End();
                     }
                     else if (FormLevels.numblvl == 5 && leatherRopeFung != 3)
                     {
@@ -135,24 +133,17 @@ namespace TheHeroOfTheMaze
                     }
                     else if (FormLevels.numblvl < 5)
                     {
+                        RegistrationName.time += Convert.ToInt32(timeEnd.Text) + Convert.ToInt32(labelSteps.Text);
                         arrayCells[y, x + 1] = 2;
                         arrayCells[y, x] = 0;
                         numberOfSteps++;
                         labelSteps.Text = numberOfSteps.ToString();
                         DrawLabirintGame();
                         x++;
-                        timerGame.Stop();
-                        MessageBox.Show("Вы вышли из лабиринта за количество секунд, равное " + timeEnd.Text + "!");
-                        FormLevels.levelPerson++;
-
+                       
                         FormLevels.numblvl++;
                         FormGame.nextLevel++;
-
-                        numberOfSteps = 0;
-                        timeEnd.Text = "0";
-                        labelSteps.Text = numberOfSteps.ToString();
-
-                        DrawLabirint();
+                        End();
                     }
                 }
                 else if (arrayCells[y, x + 1] == 2)
@@ -187,22 +178,16 @@ namespace TheHeroOfTheMaze
                 {
                     if (FormLevels.numblvl == 5 && leatherRopeFung == 3)
                     {
+                        RegistrationName.time += Convert.ToInt32(timeEnd.Text) + Convert.ToInt32(labelSteps.Text);
                         arrayCells[y, x - 1] = 2;
                         arrayCells[y, x] = 0;
                         numberOfSteps++;
                         labelSteps.Text = numberOfSteps.ToString();
                         DrawLabirintGame();
                         x--;
-                        timerGame.Stop();
-                        MessageBox.Show("Вы вышли из лабиринта за количество секунд, равное " + timeEnd.Text + "!");
-                        FormLevels.levelPerson++;
+                        
                         FormLevels.numblvl++;
-
-                        numberOfSteps = 0;
-                        timeEnd.Text = "0";
-                        labelSteps.Text = numberOfSteps.ToString();
-
-                        DrawLabirint();
+                        End();
                     }
 
                     else if (FormLevels.numblvl == 5 && leatherRopeFung != 3)
@@ -211,23 +196,16 @@ namespace TheHeroOfTheMaze
                     }
                     else if (FormLevels.numblvl < 5)
                     {
+                        RegistrationName.time += Convert.ToInt32(timeEnd.Text) + Convert.ToInt32(labelSteps.Text);
                         arrayCells[y, x - 1] = 2;
                         arrayCells[y, x] = 0;
                         numberOfSteps++;
                         labelSteps.Text = numberOfSteps.ToString();
                         DrawLabirintGame();
                         x--;
-                        timerGame.Stop();
-                        MessageBox.Show("Вы вышли из лабиринта за количество секунд, равное " + timeEnd.Text + "!");
-                        FormLevels.levelPerson++;
-
+                        
                         FormLevels.numblvl++;
-
-                        numberOfSteps = 0;
-                        timeEnd.Text = "0";
-                        labelSteps.Text = numberOfSteps.ToString();
-
-                        DrawLabirint();
+                        End();
                     }
                 }
                 else if (arrayCells[y, x - 1] == 2)
@@ -241,7 +219,7 @@ namespace TheHeroOfTheMaze
             }
         }
 
-        public void DownClick() 
+        public void DownClick()     
         {
             if (y + 1 >= 0 && y + 1 <= dataGridViewField.RowCount - 1)
             {
@@ -262,19 +240,15 @@ namespace TheHeroOfTheMaze
                 {
                     if (FormLevels.numblvl == 5 && leatherRopeFung == 3)
                     {
+                        RegistrationName.time += Convert.ToInt32(timeEnd.Text) + Convert.ToInt32(labelSteps.Text);
                         arrayCells[y + 1, x] = 2;
                         arrayCells[y, x] = 0;
                         numberOfSteps++;
                         labelSteps.Text = numberOfSteps.ToString();
                         DrawLabirintGame();
                         y++;
-                        timerGame.Stop();
-                        MessageBox.Show("Вы вышли из лабиринта за количество секунд, равное " + timeEnd.Text + "!");
-                        FormLevels.levelPerson++;
-                        numberOfSteps = 0;
-                        timeEnd.Text = "0";
-                        labelSteps.Text = numberOfSteps.ToString();
-                        DrawLabirint();
+                       
+                        End();
                     }
 
                     else if (FormLevels.numblvl == 5 && leatherRopeFung != 3)
@@ -283,19 +257,14 @@ namespace TheHeroOfTheMaze
                     }
                     else if (FormLevels.numblvl < 5)
                     {
+                        RegistrationName.time += Convert.ToInt32(timeEnd.Text) + Convert.ToInt32(labelSteps.Text);
                         arrayCells[y + 1, x] = 2;
                         arrayCells[y, x] = 0;
                         numberOfSteps++;
                         labelSteps.Text = numberOfSteps.ToString();
                         DrawLabirintGame();
                         y++;
-                        timerGame.Stop();
-                        MessageBox.Show("Вы вышли из лабиринта за количество секунд, равное " + timeEnd.Text + "!");
-                        FormLevels.levelPerson++;
-                        numberOfSteps = 0;
-                        timeEnd.Text = "0";
-                        labelSteps.Text = numberOfSteps.ToString();
-                        DrawLabirint();
+                        End();
                     }
                 }
                 else if (arrayCells[y + 1, x] == 2)

@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 
 namespace TheHeroOfTheMaze
 {
-    internal class Registration
+    class Registration
     {
-        //думаю в файл все сохранять, а вывод в конце как лучше сделать-пока не  знаю
-        string nickname;
-        public Registration(string nickname)
-        { 
-            this.nickname = nickname;
-        }
+        public string Name;
+        public Rating Rating;
+    }
 
-        public void AddNickname()
-        {
-
-        }
+    class Rating
+    {
+        public int Tick;
     }
 }
+

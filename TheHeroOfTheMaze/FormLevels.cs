@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TheHeroOfTheMaze
@@ -34,8 +27,9 @@ namespace TheHeroOfTheMaze
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             array();
-            
-            
+            flagclose = false;
+
+
             if (FormGame.exit != -1)
             {
                 MessageBox.Show(lines[0]);
@@ -43,15 +37,18 @@ namespace TheHeroOfTheMaze
             }
         }
 
+        public static bool flagclose = false;
 
         private void level1_Click(object sender, EventArgs e)
         {
             numblvl = 1;
             Close();
+            flagclose = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            flagclose = true;
             if (levelPerson >= 2)
             {
                 numblvl = 2;
@@ -65,6 +62,7 @@ namespace TheHeroOfTheMaze
 
         private void button3_Click(object sender, EventArgs e)
         {
+            flagclose = true;
             if (levelPerson >= 3)
             {
                 numblvl = 3;
@@ -78,6 +76,7 @@ namespace TheHeroOfTheMaze
 
         private void button4_Click(object sender, EventArgs e)
         {
+            flagclose = true;
             if (levelPerson >= 4)
             {
                 numblvl = 4;
@@ -91,10 +90,30 @@ namespace TheHeroOfTheMaze
 
         private void History1_Click(object sender, EventArgs e)
         {
+            flagclose = true;
             numblvl = -1;
             history = 1;
             historystr = History1.Text.Trim();
             Close();
-        }     
+        }      
+
+        private void buttonTop_Click_1(object sender, EventArgs e)
+        {
+            flagclose = true;
+            string path = "Top.txt";
+
+            if (File.Exists(path))
+            {
+                lines = File.ReadAllLines(path);
+            }
+            int i = 0;
+            string top = "";
+            while (i < lines.Length)
+            {
+                top += lines[i] + "\n";
+                i++;
+            }
+            MessageBox.Show(top);
+        }
     }
 }

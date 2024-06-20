@@ -7,7 +7,6 @@ namespace TheHeroOfTheMaze
 {
     internal class Level
     {
-        Control cntrl;
         protected DataGridView dataGridViewField;
         Bitmap imageWall, imageRoad, imagePlayer, imageEnd, imageRope, imageSkin, imageFung;
         protected int[,] arrayCells;
@@ -15,6 +14,13 @@ namespace TheHeroOfTheMaze
         Label steps;
         string[] strings;
 
+        private const int Road = 0;
+        private const int Wall = 1;
+        private const int Player = 2;
+        private const int End = 3;
+        private const int Fung = 4;
+        private const int Skin = 5;
+        private const int Rope = 6;
         public Level(DataGridView dataGridViewField, Label steps, int[,] arrayCells)
         {
             this.imageRoad = new Bitmap("image/земля.png");
@@ -46,33 +52,34 @@ namespace TheHeroOfTheMaze
             {
                 for (int j = 0; j < dataGridViewField.ColumnCount; j++)
                 {
-                    if (arrayCells[i, j] == 0)
+                    int cellType = arrayCells[i, j];
+
+                    switch (cellType)
                     {
-                        dataGridViewField.Rows[i].Cells[j].Value = imageRoad;
-                    }
-                    if (arrayCells[i, j] == 1)
-                    {
-                        dataGridViewField.Rows[i].Cells[j].Value = imageWall;
-                    }
-                    if (arrayCells[i, j] == 2)
-                    {
-                        dataGridViewField.Rows[i].Cells[j].Value = imagePlayer;
-                    }
-                    if (arrayCells[i, j] == 3)
-                    {
-                        dataGridViewField.Rows[i].Cells[j].Value = imageEnd;
-                    }
-                    if (arrayCells[i, j] == 4)
-                    {
-                        dataGridViewField.Rows[i].Cells[j].Value = imageFung;
-                    }
-                    if (arrayCells[i, j] == 5)
-                    {
-                        dataGridViewField.Rows[i].Cells[j].Value = imageSkin;
-                    }
-                    if (arrayCells[i, j] == 6)
-                    {
-                        dataGridViewField.Rows[i].Cells[j].Value = imageRope;
+                        case Road:
+                            dataGridViewField.Rows[i].Cells[j].Value = imageRoad;
+                            break;
+                        case Wall:
+                            dataGridViewField.Rows[i].Cells[j].Value = imageWall;
+                            break;
+                        case Player:
+                            dataGridViewField.Rows[i].Cells[j].Value = imagePlayer;
+                            break;
+                        case End:
+                            dataGridViewField.Rows[i].Cells[j].Value = imageEnd;
+                            break;
+                        case Fung:
+                            dataGridViewField.Rows[i].Cells[j].Value = imageFung;
+                            break;
+                        case Skin:
+                            dataGridViewField.Rows[i].Cells[j].Value = imageSkin;
+                            break;
+                        case Rope:
+                            dataGridViewField.Rows[i].Cells[j].Value = imageRope;
+                            break;
+                        default:
+                            
+                            break;
                     }
                 }
             }
@@ -106,36 +113,13 @@ namespace TheHeroOfTheMaze
             }
             DrawLabirintGame();
         }
-        public void Lvl_1()
+
+        public void Lvl(int numblevel)
         {
             ArrayLvl();
-            string[] one = strings[0].Split(','); 
+            string[] one = strings[numblevel-1].Split(',');
             Basis(one);
-            
-        }
-        public void Lvl_2()
-        {
-            ArrayLvl();
-            string[] one = strings[1].Split(',');
-            Basis(one);
-        }
-        public void Lvl_3()
-        {
-            ArrayLvl();
-            string[] one = strings[2].Split(',');
-            Basis(one);
-        }
-        public void Lvl_4() 
-        {
-            ArrayLvl();
-            string[] one = strings[3].Split(',');
-            Basis(one);
-        }
-        public void Lvl_5()
-        {
-            ArrayLvl();
-            string[] one = strings[4].Split(',');
-            Basis(one);
+
         }
     }
 }

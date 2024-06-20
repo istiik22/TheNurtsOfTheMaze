@@ -383,12 +383,14 @@
             // 
             // labelHistoryText
             // 
-            this.labelHistoryText.BackColor = System.Drawing.Color.DarkGray;
+            this.labelHistoryText.BackColor = System.Drawing.Color.Gainsboro;
             this.labelHistoryText.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelHistoryText.ForeColor = System.Drawing.SystemColors.InfoText;
             this.labelHistoryText.Location = new System.Drawing.Point(790, 354);
             this.labelHistoryText.Name = "labelHistoryText";
             this.labelHistoryText.Size = new System.Drawing.Size(444, 509);
             this.labelHistoryText.TabIndex = 14;
+            this.labelHistoryText.Text = "Мы желаем вам удачи, путник!";
             // 
             // FormGame
             // 

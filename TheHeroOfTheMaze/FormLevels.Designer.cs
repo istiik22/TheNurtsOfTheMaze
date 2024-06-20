@@ -35,6 +35,7 @@
             this.History1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.buttonTop = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // level1
@@ -112,12 +113,24 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Истории Нартов";
             // 
+            // buttonTop
+            // 
+            this.buttonTop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonTop.Location = new System.Drawing.Point(783, 297);
+            this.buttonTop.Name = "buttonTop";
+            this.buttonTop.Size = new System.Drawing.Size(212, 57);
+            this.buttonTop.TabIndex = 9;
+            this.buttonTop.Text = "Рейтинг игроков истории";
+            this.buttonTop.UseVisualStyleBackColor = true;
+            this.buttonTop.Click += new System.EventHandler(this.buttonTop_Click_1);
+            // 
             // FormLevels
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::TheHeroOfTheMaze.Properties.Resources.levels;
             this.ClientSize = new System.Drawing.Size(1256, 875);
+            this.Controls.Add(this.buttonTop);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.History1);
@@ -141,5 +154,6 @@
         private System.Windows.Forms.Button History1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button buttonTop;
     }
 }

@@ -21,6 +21,8 @@ namespace TheHeroOfTheMaze
         public static int nextLevel = 0;
         public static int exit = 1;
 
+        string filePath = "Top.txt";
+
         public void array()
         {
             string path = "files/base.txt";
@@ -72,16 +74,16 @@ namespace TheHeroOfTheMaze
       
         private void FormBoss_Load(object sender, EventArgs e)
         {
+            
             dataGridViewField.Rows.Add(15);
             level = new Level(dataGridViewField,  labelSteps, arrayCells);
             level.DrawLabirint();
             LevelNumb();
-            array();
+            array();         
         }
 
         private void TextHistory(int n1, int n2)
         {
-
             for (int i = n1; i <= n2; i++)
             {
                 labelHistoryText.Text += hist[i];
@@ -94,11 +96,9 @@ namespace TheHeroOfTheMaze
             HistoryGame();
             if (FormLevels.numblvl == 1)
             {
-                
-                level.Lvl_1();
+                level.Lvl(FormLevels.numblvl);
                 //this.BackgroundImage = Image.FromFile("background/____.png");
-                RealizationLvl();
-                
+                RealizationLvl();                
             }
             if (FormLevels.numblvl == 2)
             {
@@ -106,8 +106,7 @@ namespace TheHeroOfTheMaze
                 {
                     TextHistory(6, 10);
                 }
-                
-                level.Lvl_2();
+                level.Lvl(FormLevels.numblvl);
                 RealizationLvl();
                 
             }
@@ -117,8 +116,7 @@ namespace TheHeroOfTheMaze
                 {
                     TextHistory(11, 13);
                 }
-                
-                level.Lvl_3();
+                level.Lvl(FormLevels.numblvl);
                 RealizationLvl();
                 
             }
@@ -128,8 +126,7 @@ namespace TheHeroOfTheMaze
                 {
                     TextHistory(14, 16);
                 }
-                
-                level.Lvl_4();
+                level.Lvl(FormLevels.numblvl);
                 RealizationLvl();
                 
             }
@@ -140,11 +137,16 @@ namespace TheHeroOfTheMaze
                 {
                     TextHistory(17, 19);
                 }
-                
-                
-                level.Lvl_5();
+                level.Lvl(FormLevels.numblvl);
                 RealizationLvl();
-                
+                List<Registration> registrations = ReadRegistrationsFromFile(filePath);
+
+                AddRegistration(registrations, RegistrationName.nickname, RegistrationName.time);
+
+                registrations.Sort((reg1, reg2) => reg1.Rating.Tick.CompareTo(reg2.Rating.Tick));
+
+                WriteRegistrationsToFile(filePath, registrations);
+
             }
             if (FormLevels.numblvl == -1) 
             {
@@ -154,17 +156,12 @@ namespace TheHeroOfTheMaze
                 }
                 
                 FormLevels.numblvl = 1;
-                level.Lvl_1();
+                level.Lvl(FormLevels.numblvl);
                 control = new Control(dataGridViewField, labelSteps, x, y, arrayCells, timerGame, labelTime);
                 NastroikiLvl();
                 labelTextLevel.Text = FormLevels.historystr;
+                
             }
-            //else
-            //{
-            //    exit = 0;
-            //    //Close();
-            //    MessageBox.Show(lines[4]);
-            //}
         }
 
         private void HistoryGame()
@@ -203,7 +200,6 @@ namespace TheHeroOfTheMaze
             timerGame.Start();
         }
      
-
         private void timerGame_Tick(object sender, EventArgs e)
         {
             ticks++;
@@ -214,9 +210,62 @@ namespace TheHeroOfTheMaze
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
-            //array();
-
+            //array();                    
         }
+
+        static List<Registration> ReadRegistrationsFromFile(string filePath)
+        {
+            List<Registration> registrations = new List<Registration>();
+
+            // Чтение данных из файла
+            if (File.Exists(filePath))
+            {
+                string[] lines = File.ReadAllLines(filePath);
+
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split(':');
+                    if (parts.Length == 2)
+                    {
+                        string name = parts[0].Trim();
+                        if (int.TryParse(parts[1].Trim(), out int tick))
+                        {
+                            Registration registration = new Registration();
+                            registration.Name = name;
+                            registration.Rating = new Rating();
+                            registration.Rating.Tick = tick;
+
+                            registrations.Add(registration);
+                        }
+                    }
+                }
+            }
+
+            return registrations;
+        }
+
+        static void AddRegistration(List<Registration> registrations, string name, int tick)
+        {
+            Registration newRegistration = new Registration();
+            newRegistration.Name = name;
+            newRegistration.Rating = new Rating();
+            newRegistration.Rating.Tick = tick;
+
+            registrations.Add(newRegistration);
+        }
+
+        static void WriteRegistrationsToFile(string filePath, List<Registration> registrations)
+        {
+            // Запись отсортированных данных в файл
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                foreach (var registration in registrations)
+                {
+                    writer.WriteLine(registration.Name + ": " + registration.Rating.Tick);
+                }
+            }
+        }
+
 
         private void RulesGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -263,9 +312,8 @@ namespace TheHeroOfTheMaze
         {
             exit=0;
             Close();
-            
-        }
+            FormLevels.flagclose = false;
 
-        
+        }      
     }   
 }
