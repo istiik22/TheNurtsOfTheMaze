@@ -213,7 +213,7 @@ namespace TheHeroOfTheMaze
             //array();                    
         }
 
-        static List<Registration> ReadRegistrationsFromFile(string filePath)
+        List<Registration> ReadRegistrationsFromFile(string filePath)
         {
             List<Registration> registrations = new List<Registration>();
 
@@ -244,7 +244,7 @@ namespace TheHeroOfTheMaze
             return registrations;
         }
 
-        static void AddRegistration(List<Registration> registrations, string name, int tick)
+        void AddRegistration(List<Registration> registrations, string name, int tick)
         {
             Registration newRegistration = new Registration();
             newRegistration.Name = name;
@@ -254,7 +254,7 @@ namespace TheHeroOfTheMaze
             registrations.Add(newRegistration);
         }
 
-        static void WriteRegistrationsToFile(string filePath, List<Registration> registrations)
+        void WriteRegistrationsToFile(string filePath, List<Registration> registrations)
         {
             // Запись отсортированных данных в файл
             using (StreamWriter writer = new StreamWriter(filePath))
