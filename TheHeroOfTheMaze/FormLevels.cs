@@ -99,7 +99,6 @@ namespace TheHeroOfTheMaze
 
         private void buttonTop_Click_1(object sender, EventArgs e)
         {
-            flagclose = true;
             string path = "Top.txt";
 
             if (File.Exists(path))
