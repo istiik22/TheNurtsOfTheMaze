@@ -110,13 +110,13 @@ namespace TheHeroOfTheMaze
             //Close();
 
             // Создаем экземпляр второй формы
-            FormTopTable TopTableform = new FormTopTable();
+            FormTopTable topTableform = new FormTopTable();
 
             // Скрываем текущую форму
             this.Hide();
 
             // Показываем вторую форму
-            TopTableform.Show();
+            topTableform.Show();
 
         }
 

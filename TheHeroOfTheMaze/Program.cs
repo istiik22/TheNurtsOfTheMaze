@@ -30,7 +30,7 @@ namespace TheHeroOfTheMaze
 
             }
 
-            while(FormTopTable.lineIndex  != 0)
+            if (FormTopTable.lineIndex != 0)
             {
                 Application.Run(new FormLevels());
             }
