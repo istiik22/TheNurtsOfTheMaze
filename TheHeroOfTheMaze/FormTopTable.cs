@@ -53,7 +53,7 @@ namespace TheHeroOfTheMaze
 
         private void buttonExitLvl_Click(object sender, EventArgs e)
         {
-            FormGame.exit++;
+            FormGame.exit= -1;
             lineIndex++;
 
             this.Close();

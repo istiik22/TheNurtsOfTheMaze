@@ -16,13 +16,7 @@ namespace TheHeroOfTheMaze
 
             Application.Run(new FormHello());
             Application.Run(new RegistrationName());
-            Application.Run(new FormLevels());
-
-
-            if (FormTopTable.flagExitLvl == true)
-            {
-                Application.Run(new FormLevels());
-            }
+            Application.Run(new FormLevels());                    
 
             if (FormLevels.flagclose == true)
             {
@@ -39,18 +33,17 @@ namespace TheHeroOfTheMaze
             {
                 FormGame.exit = -1;
                 Application.Run(new FormLevels());
-                
+
                 if (FormTopTable.flagExitLvl == true)
                 {
                     Application.Run(new FormLevels());
                 }
+
                 if (FormLevels.flagclose == true)
                 {
                     Application.Run(new FormGame());
-                }
-                
+                }               
             }
-
         }
     }
 }

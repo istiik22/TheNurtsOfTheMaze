@@ -9,6 +9,7 @@ namespace TheHeroOfTheMaze
         public static int numblvl;
         public static int history;
         public static string historystr;
+        public static bool reiting = false;
         string[] lines;
 
         public static int levelPerson = 1;
@@ -36,6 +37,9 @@ namespace TheHeroOfTheMaze
                 MessageBox.Show(lines[0]);
                 MessageBox.Show(lines[1]);
             }
+            FormGame.exit++;
+
+
         }
 
         public static bool flagclose = false;
@@ -106,18 +110,9 @@ namespace TheHeroOfTheMaze
 
         private void buttonTop_Click_1(object sender, EventArgs e)
         {
-            //FormTopTable.flagExitLvl = true;
-            //Close();
 
-            // Создаем экземпляр второй формы
-            FormTopTable topTableform = new FormTopTable();
-
-            // Скрываем текущую форму
-            this.Hide();
-
-            // Показываем вторую форму
-            topTableform.Show();
-
+            FormTopTable toptable = new FormTopTable();
+            toptable.Show();
         }
 
     }
