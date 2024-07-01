@@ -10,6 +10,7 @@ namespace TheHeroOfTheMaze
         public RegistrationName()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void buttonGame_Click(object sender, EventArgs e)

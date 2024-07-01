@@ -81,6 +81,12 @@
     <Compile Include="FormLevels.Designer.cs">
       <DependentUpon>FormLevels.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormTopTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTopTable.Designer.cs">
+      <DependentUpon>FormTopTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Level.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormLevels.resx">
       <DependentUpon>FormLevels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTopTable.resx">
+      <DependentUpon>FormTopTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

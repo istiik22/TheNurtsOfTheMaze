@@ -23,6 +23,44 @@ namespace TheHeroOfTheMaze
 
         string filePath = "Top.txt";
 
+
+        //работа с файлом рейтинга
+        private List<Registration> ReadRegistrationsFromFile(string filePath)
+        {
+            List<Registration> registrations = new List<Registration>();
+
+            if (File.Exists(filePath))
+            {
+                string[] lines = File.ReadAllLines(filePath);
+
+                foreach (string line in lines)
+                {
+
+                    if (line == "Имя: баллы")
+                        continue;
+
+
+                    string[] parts = line.Split(':');
+
+                    if (parts.Length == 2)
+                    {
+                        string name = parts[0].Trim();
+                        if (int.TryParse(parts[1].Trim(), out int rating))
+                        {
+                            Registration registration = new Registration();
+                            registration.Name = name;
+                            registration.Rating = rating;
+
+                            registrations.Add(registration);
+                        }
+                    }
+                }
+            }
+
+            return registrations;
+        }
+
+        //считывание с файла
         public void array()
         {
             string path = "files/base.txt";
@@ -33,34 +71,35 @@ namespace TheHeroOfTheMaze
             }
         }
        
+        //управление вверх
         private void buttonUp_Click(object sender, EventArgs e)
         {
             control.UpClick();
             NextLevels();
             nextLevel = 0;
         }
-
+        //управление вправо
         private void buttonRight_Click(object sender, EventArgs e)
         {
             control.RightClick();
             NextLevels();
             nextLevel = 0;
         }
-
+        //управление вниз
         private void buttonDown_Click(object sender, EventArgs e)
         {
             control.DownClick();
             NextLevels();
             nextLevel = 0;
         }
-
+        //управление влево
         private void buttonLeft_Click(object sender, EventArgs e)
         {
            control.LeftClick();
             NextLevels();
             nextLevel = 0;
         }
-
+        //новая игра
         private void NewGameLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             numberOfSteps=0;
@@ -71,7 +110,7 @@ namespace TheHeroOfTheMaze
             timerGame.Stop();
             LevelNumb();
         }
-      
+        
         private void FormBoss_Load(object sender, EventArgs e)
         {
             
@@ -81,7 +120,7 @@ namespace TheHeroOfTheMaze
             LevelNumb();
             array();         
         }
-
+        //текст истории
         private void TextHistory(int n1, int n2)
         {
             for (int i = n1; i <= n2; i++)
@@ -90,14 +129,13 @@ namespace TheHeroOfTheMaze
                 labelHistoryText.Text += "\n";
             }
         }
-
+        //вызывает нужный уровень
         public void LevelNumb()
         {
             HistoryGame();
             if (FormLevels.numblvl == 1)
             {
                 level.Lvl(FormLevels.numblvl);
-                //this.BackgroundImage = Image.FromFile("background/____.png");
                 RealizationLvl();                
             }
             if (FormLevels.numblvl == 2)
@@ -138,12 +176,13 @@ namespace TheHeroOfTheMaze
                     TextHistory(17, 19);
                 }
                 level.Lvl(FormLevels.numblvl);
+
                 RealizationLvl();
                 List<Registration> registrations = ReadRegistrationsFromFile(filePath);
 
                 AddRegistration(registrations, RegistrationName.nickname, RegistrationName.time);
 
-                registrations.Sort((reg1, reg2) => reg1.Rating.Tick.CompareTo(reg2.Rating.Tick));
+                registrations.Sort((reg1, reg2) => reg1.Rating.CompareTo(reg2.Rating));
 
                 WriteRegistrationsToFile(filePath, registrations);
 
@@ -163,7 +202,7 @@ namespace TheHeroOfTheMaze
                 
             }
         }
-
+        //считывает данные истории с файла
         private void HistoryGame()
         {
             string path = "files/history.txt";
@@ -189,7 +228,7 @@ namespace TheHeroOfTheMaze
             }
             
         }
-
+        //начальное значение уровня
         public void NastroikiLvl()
         {
             x = 0;
@@ -199,7 +238,7 @@ namespace TheHeroOfTheMaze
             timerGame.Stop();
             timerGame.Start();
         }
-     
+        //таймер
         private void timerGame_Tick(object sender, EventArgs e)
         {
             ticks++;
@@ -210,69 +249,39 @@ namespace TheHeroOfTheMaze
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
-            //array();                    
         }
 
-        List<Registration> ReadRegistrationsFromFile(string filePath)
-        {
-            List<Registration> registrations = new List<Registration>();
 
-            // Чтение данных из файла
-            if (File.Exists(filePath))
-            {
-                string[] lines = File.ReadAllLines(filePath);
-
-                foreach (string line in lines)
-                {
-                    string[] parts = line.Split(':');
-                    if (parts.Length == 2)
-                    {
-                        string name = parts[0].Trim();
-                        if (int.TryParse(parts[1].Trim(), out int tick))
-                        {
-                            Registration registration = new Registration();
-                            registration.Name = name;
-                            registration.Rating = new Rating();
-                            registration.Rating.Tick = tick;
-
-                            registrations.Add(registration);
-                        }
-                    }
-                }
-            }
-
-            return registrations;
-        }
-
-        void AddRegistration(List<Registration> registrations, string name, int tick)
+        
+        //добавление игрока в топ
+        void AddRegistration(List<Registration> registrations, string name, int rating)
         {
             Registration newRegistration = new Registration();
             newRegistration.Name = name;
-            newRegistration.Rating = new Rating();
-            newRegistration.Rating.Tick = tick;
+            newRegistration.Rating = rating;
 
             registrations.Add(newRegistration);
         }
-
+        // Запись отсортированных данных в файл
         void WriteRegistrationsToFile(string filePath, List<Registration> registrations)
-        {
-            // Запись отсортированных данных в файл
+        {           
             using (StreamWriter writer = new StreamWriter(filePath))
             {
+                writer.WriteLine("Имя: Баллы");
                 foreach (var registration in registrations)
                 {
-                    writer.WriteLine(registration.Name + ": " + registration.Rating.Tick);
+                    writer.WriteLine(registration.Name + ": " + registration.Rating);
                 }
             }
         }
 
-
+        //об игре
         private void RulesGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(lines[2]);
 
         }
-
+        //управление с клавиатуры
         private void FormBoss_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left)
@@ -300,6 +309,7 @@ namespace TheHeroOfTheMaze
                 nextLevel = 0;
             }
         }
+        //переход на следующий уровень
         private void NextLevels()
         {
             if (nextLevel == 1)
@@ -307,7 +317,7 @@ namespace TheHeroOfTheMaze
                 LevelNumb();
             }
         }
-
+        //выход в форму с историями и уровнями
         private void buttonExit_Click(object sender, EventArgs e)
         {
             exit=0;

@@ -28,6 +28,7 @@ namespace TheHeroOfTheMaze
             this.StartPosition = FormStartPosition.CenterScreen;
             array();
             flagclose = false;
+            FormTopTable.flagExitLvlEver = 0;
 
 
             if (FormGame.exit != -1)
@@ -48,44 +49,50 @@ namespace TheHeroOfTheMaze
 
         private void button2_Click(object sender, EventArgs e)
         {
-            flagclose = true;
+            
             if (levelPerson >= 2)
             {
                 numblvl = 2;
                 Close();
+                flagclose = true;
             }
             else
             {
                 MessageBox.Show(lines[6]);
             }
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            flagclose = true;
+           
             if (levelPerson >= 3)
             {
                 numblvl = 3;
                 Close();
+                flagclose = true;
             }
             else
             {
                 MessageBox.Show(lines[6]);
             }
+            
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            flagclose = true;
+            
             if (levelPerson >= 4)
             {
                 numblvl = 4;
                 Close();
+                flagclose = true;
             }
             else
             {
                 MessageBox.Show(lines[6]);
             }
+            
         }
 
         private void History1_Click(object sender, EventArgs e)
@@ -99,20 +106,19 @@ namespace TheHeroOfTheMaze
 
         private void buttonTop_Click_1(object sender, EventArgs e)
         {
-            string path = "Top.txt";
+            //FormTopTable.flagExitLvl = true;
+            //Close();
 
-            if (File.Exists(path))
-            {
-                lines = File.ReadAllLines(path);
-            }
-            int i = 0;
-            string top = "";
-            while (i < lines.Length)
-            {
-                top += lines[i] + "\n";
-                i++;
-            }
-            MessageBox.Show(top);
+            // Создаем экземпляр второй формы
+            FormTopTable TopTableform = new FormTopTable();
+
+            // Скрываем текущую форму
+            this.Hide();
+
+            // Показываем вторую форму
+            TopTableform.Show();
+
         }
+
     }
 }

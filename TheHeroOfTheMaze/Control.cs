@@ -219,7 +219,7 @@ namespace TheHeroOfTheMaze
             }
         }
 
-        public void DownClick()     
+        public void DownClick()
         {
             if (y + 1 >= 0 && y + 1 <= dataGridViewField.RowCount - 1)
             {

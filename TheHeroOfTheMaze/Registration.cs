@@ -9,13 +9,8 @@ namespace TheHeroOfTheMaze
 {
     class Registration
     {
-        public string Name;
-        public Rating Rating;
-    }
-
-    class Rating
-    {
-        public int Tick;
+        public string Name { get; set; }
+        public int Rating { get; set; }
     }
 }
 
