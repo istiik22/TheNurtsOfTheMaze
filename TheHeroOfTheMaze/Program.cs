@@ -24,20 +24,20 @@ namespace TheHeroOfTheMaze
 
             }
 
-            if (FormTopTable.lineIndex != 0)
-            {
-                Application.Run(new FormLevels());
-            }
+            //if (FormTopTable.lineIndex != 0)
+            //{
+            //    Application.Run(new FormLevels());
+            //}
 
             while (FormGame.exit == 0)
             {
                 FormGame.exit = -1;
                 Application.Run(new FormLevels());
 
-                if (FormTopTable.flagExitLvl == true)
-                {
-                    Application.Run(new FormLevels());
-                }
+                //if (FormTopTable.flagExitLvl == false)
+                //{
+                //    Application.Run(new FormLevels());
+                //}
 
                 if (FormLevels.flagclose == true)
                 {

@@ -37,8 +37,8 @@ namespace TheHeroOfTheMaze
                 MessageBox.Show(lines[0]);
                 MessageBox.Show(lines[1]);
             }
-            FormGame.exit++;
-
+            //FormGame.exit++;
+            FormTopTable.lineIndex++;
 
         }
 

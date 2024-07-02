@@ -23,54 +23,6 @@ namespace TheHeroOfTheMaze
 
         string filePath = "Top.txt";
 
-
-        //работа с файлом рейтинга
-        private List<Registration> ReadRegistrationsFromFile(string filePath)
-        {
-            List<Registration> registrations = new List<Registration>();
-
-            if (File.Exists(filePath))
-            {
-                string[] lines = File.ReadAllLines(filePath);
-
-                foreach (string line in lines)
-                {
-
-                    if (line == "Имя: баллы")
-                        continue;
-
-
-                    string[] parts = line.Split(':');
-
-                    if (parts.Length == 2)
-                    {
-                        string name = parts[0].Trim();
-                        if (int.TryParse(parts[1].Trim(), out int rating))
-                        {
-                            Registration registration = new Registration();
-                            registration.Name = name;
-                            registration.Rating = rating;
-
-                            registrations.Add(registration);
-                        }
-                    }
-                }
-            }
-
-            return registrations;
-        }
-
-        //считывание с файла
-        public void array()
-        {
-            string path = "files/base.txt";
-
-            if (File.Exists(path))
-            {
-                lines = File.ReadAllLines(path);
-            }
-        }
-       
         //управление вверх
         private void buttonUp_Click(object sender, EventArgs e)
         {
@@ -324,6 +276,52 @@ namespace TheHeroOfTheMaze
             Close();
             FormLevels.flagclose = false;
 
-        }      
+        }
+        //работа с файлом рейтинга
+        private List<Registration> ReadRegistrationsFromFile(string filePath)
+        {
+            List<Registration> registrations = new List<Registration>();
+
+            if (File.Exists(filePath))
+            {
+                string[] lines = File.ReadAllLines(filePath);
+
+                foreach (string line in lines)
+                {
+
+                    if (line == "Имя: баллы")
+                        continue;
+
+
+                    string[] parts = line.Split(':');
+
+                    if (parts.Length == 2)
+                    {
+                        string name = parts[0].Trim();
+                        if (int.TryParse(parts[1].Trim(), out int rating))
+                        {
+                            Registration registration = new Registration();
+                            registration.Name = name;
+                            registration.Rating = rating;
+
+                            registrations.Add(registration);
+                        }
+                    }
+                }
+            }
+
+            return registrations;
+        }
+
+        //считывание с файла
+        public void array()
+        {
+            string path = "files/base.txt";
+
+            if (File.Exists(path))
+            {
+                lines = File.ReadAllLines(path);
+            }
+        }
     }   
 }
